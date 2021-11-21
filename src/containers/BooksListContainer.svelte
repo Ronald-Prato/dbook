@@ -134,7 +134,7 @@ import { navigate } from "svelte-routing"
 import { es } from "date-fns/locale"
 
 import { BOOKS } from "../entities"
-import { user, gun } from "../gun"
+import { gun } from "../gun"
 import { Theme } from "../theme"
 import { quoteShortener } from "../utils/string-utils"
 import { deleteBook } from "../service/book"
@@ -211,9 +211,8 @@ const getDate = (date) => {
   return parsedDate
 }
 
-const handleDeleteBook = (bookId) => {
-  console.log("A VERERERE: ", bookId)
-  if (confirm(`¿Eliminar ${book.title}?`)) {
+const handleDeleteBook = (bookId, title) => {
+  if (confirm(`¿Eliminar ${title}?`)) {
     deleteBook(bookId)
   }
 }
@@ -260,7 +259,7 @@ const handleCreateNewStory = () => {
         <div class="book-content">
           {#if isOwn}
             <i
-              on:click="{() => handleDeleteBook(book.id)}"
+              on:click="{() => handleDeleteBook(book.id, book.title)}"
               class="mi mi-delete delete-button"></i>
           {/if}
           <h3 on:click="{() => goToBook(book.id)}" class="book-title">
