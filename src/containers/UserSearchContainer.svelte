@@ -34,6 +34,7 @@ h1 {
   overflow-y: scroll;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
   margin-top: 2%;
 }
 

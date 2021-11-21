@@ -68,9 +68,11 @@ let showProfile = false
 
 const getPathUser = () => {
   gun.get(parsedUserId).once(async (_broughtUser) => {
-    const broughtUser = await decryptData(_broughtUser.data)
-    userToShow = broughtUser
-    showProfile = true
+    if (_broughtUser) {
+      const broughtUser = await decryptData(_broughtUser.data)
+      userToShow = broughtUser
+      showProfile = true
+    }
   })
 }
 
