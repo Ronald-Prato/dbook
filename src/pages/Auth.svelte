@@ -2,7 +2,7 @@
 .dbook-logo {
   width: 300px;
   position: absolute;
-  top: 20%;
+  top: 10%;
 }
 </style>
 
