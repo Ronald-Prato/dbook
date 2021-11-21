@@ -1,6 +1,6 @@
 <style>
 main {
-  max-width: 1550px;
+  max-width: 1350px;
   min-width: 1250px; /*this could change later with responsive design tho*/
   min-height: 100vh;
   width: 100%;

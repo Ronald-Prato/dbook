@@ -144,7 +144,9 @@ onMount(() => {
           return
         }
 
+        console.log("Created By ", book.createdBy)
         gun.get(book.createdBy).once(async (_user) => {
+          console.log("USER: ", _user)
           const user = await decryptData(_user.data)
           const parsedBook = {
             ...book,
