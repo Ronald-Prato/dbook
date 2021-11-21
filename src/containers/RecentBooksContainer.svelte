@@ -128,38 +128,40 @@ const date = new Date()
 // Date of two days ago from now
 const floorDate = subDays(date.getTime(), RECENT_BOOK_DAYS_INTERVAL).getTime()
 
-onMount(() => {
-  gun
-    .get(BOOKS)
-    .map()
-    .on(async (_book, key) => {
-      if (_book) {
-        const book = await decryptData(_book.data)
+gun
+  .get(BOOKS)
+  .map()
+  .once(async (_book, key) => {
+    if (_book) {
+      const book = await decryptData(_book.data)
 
-        if (!book.published) {
-          return
-        }
-
-        if (book.createdAt < floorDate) {
-          return
-        }
-
-        gun.get(book.createdBy).once(async (_user) => {
-          if (_user) {
-            const user = await decryptData(_user.data)
-            const parsedBook = {
-              ...book,
-              createdByNickname: user.nickname,
-            }
-            store[key] = parsedBook
-          }
-        })
-      } else {
-        delete store[key]
-        store = store
+      if (!book) {
+        return
       }
-    })
-})
+
+      if (!book.published) {
+        return
+      }
+
+      if (book.createdAt < floorDate) {
+        return
+      }
+
+      gun.get(book.createdBy).once(async (_user) => {
+        if (_user) {
+          const user = await decryptData(_user.data)
+          const parsedBook = {
+            ...book,
+            createdByNickname: user.nickname,
+          }
+          store[key] = parsedBook
+        }
+      })
+    } else {
+      delete store[key]
+      store = store
+    }
+  })
 
 $: reactiveBooksList = Object.values(store).sort(
   (a, b) => a.createdAt - b.createdAt

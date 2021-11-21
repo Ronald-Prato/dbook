@@ -24,7 +24,7 @@ export const decryptData = async (data) => {
     const decrypted = await SEA.decrypt(verification, pair)
     return decrypted
   } catch (err) {
-    console.log(err)
+    console.log("Error", err)
     return null
   }
 }
