@@ -212,6 +212,7 @@ const getDate = (date) => {
 }
 
 const handleDeleteBook = (bookId) => {
+  console.log("A VERERERE: ", bookId)
   if (confirm(`¿Eliminar ${book.title}?`)) {
     deleteBook(bookId)
   }
