@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "env-cmd rollup -c -w -s",
-    "start": "sirv public --no-clear --single --port 8765 -s",
+    "start": "sirv public --no-clear --single --port 5555 -s",
     "env:dev": "env-cmd yarn run dev -s"
   },
   "devDependencies": {
