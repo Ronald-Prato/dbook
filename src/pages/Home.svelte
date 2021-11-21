@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: 0 5%;
 }
 .cta-container {
   display: flex;
