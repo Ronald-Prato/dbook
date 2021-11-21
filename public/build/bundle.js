@@ -4377,10 +4377,7 @@ var app = (function () {
     }());
     });
 
-    const relayPeer =
-      "http://localhost:3030/gun"
-        ;
-
+    const relayPeer = "http://localhost:3030/gun";
     const gun = gun$1([relayPeer]);
     const user = gun.user().recall({ sessionStorage: true });
 
