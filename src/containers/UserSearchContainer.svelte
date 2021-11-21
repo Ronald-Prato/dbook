@@ -100,10 +100,12 @@ const handleSearch = () => {
     .get(USERS)
     .map()
     .once(async (_broughtUser) => {
-      const broughtUser = await decryptData(_broughtUser.data)
-      results = [...results, broughtUser].filter(
-        (result) => result.uuid !== user.is.epub
-      )
+      if (_broughtUser) {
+        const broughtUser = await decryptData(_broughtUser.data)
+        results = [...results, broughtUser].filter(
+          (result) => result.uuid !== user.is.epub
+        )
+      }
     })
   isSearching = false
 }
