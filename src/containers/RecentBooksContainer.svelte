@@ -90,7 +90,7 @@ h1 {
 }
 
 .recent-books-main-wrapper {
-  width: 1550px;
+  width: 1350px;
 }
 
 .books-show-range-message {
