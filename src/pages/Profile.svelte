@@ -86,8 +86,10 @@ if (isMyProfile) {
       .get(_currentUser.uuid)
       .get(BOOKS)
       .map()
-      .once((_, key) => {
-        stories = [...stories, key]
+      .once((story, key) => {
+        if (story) {
+          stories = [...stories, key]
+        }
       })
   })
 } else {
