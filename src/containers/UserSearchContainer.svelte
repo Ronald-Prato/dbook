@@ -103,6 +103,10 @@ const handleSearch = () => {
     .once(async (_broughtUser) => {
       if (_broughtUser) {
         const broughtUser = await decryptData(_broughtUser.data)
+        if (!broughtUser) {
+          return
+        }
+
         if (broughtUser.uuid !== user.is.epub) {
           results = [...results, broughtUser]
         }

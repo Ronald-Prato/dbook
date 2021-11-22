@@ -67,7 +67,6 @@ let stories = []
 let showProfile = false
 
 const getPathUser = () => {
-  console.log({ userId, parsedUserId })
   gun.get(parsedUserId).once(async (_broughtUser) => {
     if (_broughtUser) {
       const broughtUser = await decryptData(_broughtUser.data)
