@@ -287,7 +287,7 @@ const handleCreateNewStory = () => {
       <button
         style="background-color: {Theme.PALETTE.primary}"
         on:click="{goToForm}">
-        Crear una histora
+        Crear una historia
       </button>
     {:else}
       <p>Sin historias aún</p>
