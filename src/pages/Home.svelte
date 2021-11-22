@@ -79,7 +79,7 @@ const goToProfile = () => {
         class="cta-container">
         <img src="assets/img/create-icon.png" alt="Crear historia" />
         <p style="color: {Theme.PALETTE.primary}" class="create">
-          Crear hitoria
+          Crear historia
         </p>
       </div>
     </section>
