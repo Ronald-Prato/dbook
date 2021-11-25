@@ -121,7 +121,9 @@ let currentPageIndex = 0
 let bookAuthor
 
 const handleAddPageView = (index) => {
-  currentBook.createdBy !== myUser.uuid && addPageView(allPages[index].id)
+  currentBook.createdBy !== myUser.uuid &&
+    allPages.length &&
+    addPageView(allPages[index].id)
 }
 
 onMount(() => {
