@@ -121,7 +121,6 @@ let currentPageIndex = 0
 let bookAuthor
 
 const handleAddPageView = (index) => {
-  console.log("Hey : ", { index, allPages })
   if (!allPages.length) {
     return
   }
@@ -153,10 +152,6 @@ onMount(() => {
           )
         })
 
-      setTimeout(() => {
-        handleAddPageView(currentPageIndex)
-      }, 1000)
-
       // Get book author
       gun.get(book.createdBy).once(async (_author) => {
         const author = await decryptData(_author.data)
@@ -170,7 +165,7 @@ onMount(() => {
 $: currentPage = allPages[currentPageIndex]
 $: {
   if (allPages.length) {
-    handleAddPageView(allPages[currentPageIndex].id)
+    handleAddPageView(currentPageIndex)
   }
 }
 
