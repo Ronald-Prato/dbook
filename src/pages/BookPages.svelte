@@ -145,7 +145,6 @@ onMount(() => {
           allPages = [...allPages, page].sort(
             (a, b) => a.createdAt - b.createdAt
           )
-          handleAddPageView(allPages[currentPageIndex].id)
         })
 
       // Get book author
@@ -159,6 +158,9 @@ onMount(() => {
 })
 
 $: currentPage = allPages[currentPageIndex]
+$: {
+  handleAddPageView(allPages[currentPageIndex].id)
+}
 
 currentUser.subscribe((_user) => {
   myUser = _user
