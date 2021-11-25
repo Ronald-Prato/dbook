@@ -80,6 +80,7 @@ const goToProfile = () => {
         <img src="assets/img/create-icon.png" alt="Crear historia" />
         <p style="color: {Theme.PALETTE.primary}" class="create">
           Crear hitoria
+          <p>{process.env.RELAY_SERVER_URL}</p>
         </p>
       </div>
     </section>
