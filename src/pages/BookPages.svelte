@@ -121,6 +121,7 @@ let currentPageIndex = 0
 let bookAuthor
 
 const handleAddPageView = (index) => {
+  console.log("Hey : ", { index, allPages })
   if (!allPages.length) {
     return
   }
