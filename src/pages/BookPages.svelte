@@ -159,7 +159,9 @@ onMount(() => {
 
 $: currentPage = allPages[currentPageIndex]
 $: {
-  handleAddPageView(allPages[currentPageIndex].id)
+  if (allPages.length) {
+    handleAddPageView(allPages[currentPageIndex].id)
+  }
 }
 
 currentUser.subscribe((_user) => {
