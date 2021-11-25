@@ -104,6 +104,7 @@ import { decryptData } from "../utils/crypto-utils"
 import { PAGES } from "../entities"
 import { currentUser } from "../store/users"
 import { addPageView } from "../utils/page-utils"
+import { SEA } from "gun"
 
 import Button from "../components/Button.svelte"
 import Stats from "../components/Stats.svelte"
@@ -145,6 +146,7 @@ onMount(() => {
           allPages = [...allPages, page].sort(
             (a, b) => a.createdAt - b.createdAt
           )
+          handleAddPageView(currentPageIndex)
         })
 
       // Get book author
