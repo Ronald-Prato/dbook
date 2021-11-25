@@ -84,8 +84,6 @@ const goToProfile = () => {
       </div>
     </section>
 
-    <p>{process.env.RELAY_SERVER_URL}</p>
-
     <UserSearchContainer />
     <BookSearchContainer />
     <RecentBooksContainer />
