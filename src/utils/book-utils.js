@@ -1,3 +1,4 @@
+import { BOOKS } from "../entities"
 import { gun, user } from "../gun"
 import { decryptData, encryptData } from "./crypto-utils"
 
@@ -25,7 +26,8 @@ export const addBookView = (bookId) => {
         views: bookViews,
       })
 
-      gun.get(bookId).put({ data: bookNewData })
+      gun.get(userId).get(BOOKS).get(bookId).put({ data: bookNewData })
+      gun.get(BOOKS).get(bookId).put({ data: bookNewData })
     }
   })
 }
@@ -49,6 +51,7 @@ export const updateBookLikes = (bookId) => {
       likes: bookLikes,
     })
 
-    gun.get(bookId).put({ data: bookNewData })
+    gun.get(userId).get(BOOKS).get(bookId).put({ data: bookNewData })
+    gun.get(BOOKS).get(bookId).put({ data: bookNewData })
   })
 }
