@@ -46,6 +46,7 @@ import { setCurrentUser } from "../store/users"
 import RecentBooksContainer from "../containers/RecentBooksContainer.svelte"
 import UserSearchContainer from "../containers/UserSearchContainer.svelte"
 import BookSearchContainer from "../containers/BookSearchContainer.svelte"
+import CreatedUsersContainer from "../containers/CreatedUsersContainer.svelte"
 
 onMount(() => {
   setCurrentUser()
@@ -65,6 +66,8 @@ const goToProfile = () => {
 
 <MainLayout>
   <div class="main-home-wrapper">
+    <CreatedUsersContainer />
+
     <section class="cta-buttons-wrapper">
       <div class="cta-container" on:click="{goToProfile}">
         <img src="assets/img/bookshelf-icon.png" alt="Mis historias" />
