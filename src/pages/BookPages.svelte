@@ -121,9 +121,11 @@ let currentPageIndex = 0
 let bookAuthor
 
 const handleAddPageView = (index) => {
-  currentBook.createdBy !== myUser.uuid &&
-    allPages.length &&
-    addPageView(allPages[index].id)
+  if (!allPages.length) {
+    return
+  }
+
+  currentBook.createdBy !== myUser.uuid && addPageView(allPages[index].id)
 }
 
 onMount(() => {
@@ -148,8 +150,11 @@ onMount(() => {
           allPages = [...allPages, page].sort(
             (a, b) => a.createdAt - b.createdAt
           )
-          handleAddPageView(currentPageIndex)
         })
+
+      setTimeout(() => {
+        handleAddPageView(currentPageIndex)
+      }, 1000)
 
       // Get book author
       gun.get(book.createdBy).once(async (_author) => {
