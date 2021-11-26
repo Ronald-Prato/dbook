@@ -43,7 +43,7 @@ gun
 </script>
 
 <section>
-  <h2>Ususarios creados</h2>
+  <h2>Usuarios creados</h2>
   <div class="count-container">
     <span>🎉</span>
     <p>{Object.keys(userCount).length}</p>
