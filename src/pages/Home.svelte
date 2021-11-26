@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
+  padding-bottom: 10%;
 }
 .cta-container {
   display: flex;
@@ -43,7 +44,7 @@ import MainLayout from "../layouts/Main.svelte"
 import { Theme } from "../theme"
 import { setCurrentUser } from "../store/users"
 
-import RecentBooksContainer from "../containers/RecentBooksContainer.svelte"
+import BookListFilter from "../containers/BookListFilter.svelte"
 import UserSearchContainer from "../containers/UserSearchContainer.svelte"
 import BookSearchContainer from "../containers/BookSearchContainer.svelte"
 import CreatedUsersContainer from "../containers/CreatedUsersContainer.svelte"
@@ -89,6 +90,14 @@ const goToProfile = () => {
 
     <UserSearchContainer />
     <BookSearchContainer />
-    <RecentBooksContainer />
+    <BookListFilter
+      filterOption="recents"
+      listTitle="Historias recientes 🕰"
+      listSubtitle="(últimas 24h)" />
+
+    <BookListFilter
+      smallVersion
+      filterOption="more-likes"
+      listTitle="Historias más gustadas ❤️" />
   </div>
 </MainLayout>

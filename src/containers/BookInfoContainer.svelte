@@ -74,7 +74,7 @@ h2 {
 </style>
 
 <script>
-import { MAX_DESCRIPTION_LENGTH } from "../constants"
+import { MAX_BOOK_TITLE_LENGTH, MAX_DESCRIPTION_LENGTH } from "../constants"
 import {
   updateBookTitle,
   updateBookDescription,
@@ -127,7 +127,11 @@ const handlePublishBook = () => {
       <span on:click="{toggleTitleEdit}" class="title-pencil-icon">✏️</span>
     {:else}
       <form class="title-form" on:submit|preventDefault="{handleUpdateTitle}">
-        <input autofocus class="title-input" bind:value="{currentBook.title}" />
+        <input
+          maxlength="{MAX_BOOK_TITLE_LENGTH}"
+          autofocus
+          class="title-input"
+          bind:value="{currentBook.title}" />
         <span
           on:click="{handleUpdateTitle}"
           style="margin-right: 14px"

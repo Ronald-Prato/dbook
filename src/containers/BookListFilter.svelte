@@ -2,6 +2,9 @@
 h1 {
   font-size: 24px;
   margin-top: 4%;
+  margin-bottom: 3%;
+  width: 100%;
+  text-align: center;
 }
 .empty-container {
   width: 100%;
@@ -24,7 +27,6 @@ h1 {
 }
 .book-case {
   width: 200px;
-  height: 300px;
   border-radius: 8px;
   position: relative;
   z-index: 10;
@@ -53,7 +55,6 @@ h1 {
 .book-content {
   min-width: 320px;
   max-width: 320px;
-  height: 300px;
   border-radius: 0 8px 8px 0;
   box-shadow: inset 0 0 2px orange;
   margin-left: -1%;
@@ -109,7 +110,6 @@ ul {
 </style>
 
 <script>
-import { onMount } from "svelte"
 import { format } from "date-fns"
 import { navigate } from "svelte-routing"
 import { es } from "date-fns/locale"
@@ -119,10 +119,14 @@ import { gun } from "../gun"
 import { Theme } from "../theme"
 import { quoteShortener } from "../utils/string-utils"
 import { decryptData } from "../utils/crypto-utils"
-import { RECENT_BOOK_DAYS_INTERVAL } from "../constants"
+import { RECENT_BOOK_DAYS_INTERVAL, MAX_LIKES_CEIL } from "../constants"
 import { subDays } from "date-fns"
 
 let store = {}
+export let filterOption = "recents"
+export let listTitle = "Historias recientes"
+export let listSubtitle = ""
+export let smallVersion = false
 
 const date = new Date()
 // Date of two days ago from now
@@ -143,8 +147,14 @@ gun
         return
       }
 
-      if (book.createdAt < floorDate) {
-        return
+      if (filterOption === "recents") {
+        if (book.createdAt < floorDate) {
+          return
+        }
+      } else if (filterOption === "more-likes") {
+        if (book.likes.length < MAX_LIKES_CEIL) {
+          return
+        }
       }
 
       gun.get(book.createdBy).once(async (_user) => {
@@ -163,9 +173,12 @@ gun
     }
   })
 
-$: reactiveBooksList = Object.values(store).sort(
-  (a, b) => a.createdAt - b.createdAt
-)
+$: reactiveBooksList =
+  filterOption === "recents"
+    ? Object.values(store).sort((a, b) => a.createdAt - b.createdAt)
+    : filterOption === "more-likes"
+    ? Object.values(store).sort((a, b) => b.likes.length - a.likes.length)
+    : []
 
 const goToBook = (bookId) => {
   navigate(`/book/${bookId}`)
@@ -193,25 +206,29 @@ const getDate = (date) => {
 <div class="recent-books-main-wrapper">
   {#if reactiveBooksList.length}
     <h1 style="color: {Theme.PALETTE.gray}">
-      Historias recientes <span class="books-show-range-message"
-        >(últimas 24h)</span>
+      {listTitle} <span class="books-show-range-message">{listSubtitle}</span>
     </h1>
     <ul>
       {#each reactiveBooksList as book}
         <li class="book-container">
           <div
             on:click="{() => goToBook(book.id)}"
-            style="background-color: {Theme.PALETTE.primary}"
+            style="background-color: {Theme.PALETTE
+              .primary}; height: {smallVersion ? '170px' : '300px'};"
             class="book-case">
             <span class="book-user-nickname">@{book.createdByNickname}</span>
             <i class="mi mi-book book-icon"></i>
           </div>
-          <div class="book-content">
+          <div
+            style="height: {smallVersion ? '170px' : '300px'};"
+            class="book-content">
             <h3 on:click="{() => goToBook(book.id)}" class="book-title">
               {quoteShortener(book.title, 80)}
             </h3>
 
-            <p class="book-description">{book.description}</p>
+            {#if !smallVersion}
+              <p class="book-description">{book.description}</p>
+            {/if}
 
             <div class="metadata-container">
               <span class="updated-at">
